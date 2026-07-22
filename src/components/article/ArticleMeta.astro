@@ -1,0 +1,23 @@
+---
+interface Props {
+	category: string;
+	pubDate: Date;
+	author?: string;
+}
+
+const { category, pubDate, author } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('pt-BR', {
+	day: '2-digit',
+	month: 'long',
+	year: 'numeric',
+	timeZone: 'UTC',
+}).format(pubDate);
+---
+
+<div class="article-meta">
+	<span class="article-category">{category}</span>
+	<span aria-hidden="true">•</span>
+	<time datetime={pubDate.toISOString()}>{formattedDate}</time>
+	{author && <span aria-hidden="true">•</span>}
+	{author && <span>{author}</span>}
+</div>

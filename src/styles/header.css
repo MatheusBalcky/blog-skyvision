@@ -1,0 +1,245 @@
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	border-bottom: 1px solid var(--color-border);
+	background: var(--color-header);
+	backdrop-filter: blur(14px);
+}
+
+.header-main {
+	display: flex;
+	min-height: 5.25rem;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
+}
+
+.brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.65rem;
+	color: var(--color-text);
+	font-size: 1.65rem;
+	font-weight: 400;
+	letter-spacing: -0.045em;
+	text-decoration: none;
+}
+
+.brand strong {
+	color: var(--color-primary);
+	font-weight: 800;
+}
+
+.brand-mark {
+	width: 2.65rem;
+	color: var(--color-primary);
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2.25;
+}
+
+.brand-mark circle {
+	fill: currentColor;
+	stroke: none;
+}
+
+.header-actions {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.icon-button {
+	display: grid;
+	width: 2.65rem;
+	height: 2.65rem;
+	place-items: center;
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
+	background: var(--color-surface);
+	color: var(--color-text);
+	cursor: pointer;
+	transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
+}
+
+.icon-button:hover {
+	border-color: var(--color-primary);
+	color: var(--color-primary);
+}
+
+.icon-button svg {
+	width: 1.25rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
+}
+
+.moon-icon,
+:root[data-theme="dark"] .sun-icon {
+	display: none;
+}
+
+:root[data-theme="dark"] .moon-icon {
+	display: block;
+}
+
+.category-nav {
+	border-top: 1px solid var(--color-border);
+}
+
+.category-mobile-bar,
+.category-menu-button {
+	display: none;
+}
+
+.category-list {
+	display: flex;
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.category-list::-webkit-scrollbar {
+	display: none;
+}
+
+.category-list a {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 0.5rem;
+	border-bottom: 2px solid transparent;
+	padding: 0.9rem 1.2rem;
+	color: var(--color-text-muted);
+	font-size: 0.92rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.category-list a:first-child {
+	padding-left: 0;
+}
+
+.category-list a:hover,
+.category-list a[aria-current="page"] {
+	border-bottom-color: var(--color-primary);
+	color: var(--color-primary);
+}
+
+.category-list svg {
+	width: 1.1rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
+}
+
+@media (max-width: 760px) {
+	.header-main {
+		min-height: 4.5rem;
+	}
+
+	.brand {
+		font-size: 1.35rem;
+	}
+
+	.brand-mark {
+		width: 2.2rem;
+	}
+
+	.category-mobile-bar {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.mobile-home-link {
+		display: grid;
+		flex: 0 0 auto;
+		width: 2.4rem;
+		height: 2.4rem;
+		place-items: center;
+		border: 1px solid transparent;
+		border-radius: 0.65rem;
+		color: var(--color-text-muted);
+		text-decoration: none;
+	}
+
+	.mobile-home-link:hover,
+	.mobile-home-link[aria-current="page"] {
+		border-color: var(--color-border);
+		background: var(--color-primary-soft);
+		color: var(--color-primary);
+	}
+
+	.mobile-home-link svg {
+		width: 1.15rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.8;
+	}
+
+	.category-menu-button {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: space-between;
+		border: 0;
+		background: transparent;
+		color: var(--color-text);
+		padding-block: 0.8rem;
+		font: inherit;
+		font-size: 0.9rem;
+		font-weight: 750;
+		cursor: pointer;
+	}
+
+	.category-menu-button svg {
+		width: 1.1rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 2;
+		transition: rotate 150ms ease;
+	}
+
+	.category-menu-button[aria-expanded="true"] svg {
+		rotate: 180deg;
+	}
+
+	.category-list {
+		display: none;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		overflow: visible;
+		padding-bottom: 0.65rem;
+	}
+
+	.category-list.is-open {
+		display: grid;
+	}
+
+	.category-list .desktop-home-link {
+		display: none;
+	}
+
+	.category-list a,
+	.category-list a:first-child {
+		min-width: 0;
+		border: 1px solid transparent;
+		border-radius: 0.65rem;
+		padding: 0.7rem 0.75rem;
+	}
+
+	.category-list a:hover,
+	.category-list a[aria-current="page"] {
+		border-color: var(--color-border);
+		background: var(--color-primary-soft);
+	}
+}

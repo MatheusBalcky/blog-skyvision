@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArticleMeta from './ArticleMeta.astro';
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="featured-article">
+	<a class="featured-article-image" href={`/artigos/${article.id}/`} tabindex="-1" aria-hidden="true">
+		<Image
+			src={article.data.cover}
+			alt=""
+			widths={[640, 960, 1280]}
+			sizes="(max-width: 820px) 100vw, 55vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
+	</a>
+	<div class="featured-article-body">
+		<span class="featured-label">Em destaque</span>
+		<ArticleMeta category={article.data.category} pubDate={article.data.pubDate} />
+		<h2><a href={`/artigos/${article.id}/`}>{article.data.title}</a></h2>
+		<p>{article.data.description}</p>
+		<a class="primary-link" href={`/artigos/${article.id}/`}>
+			Ler artigo completo <span aria-hidden="true">→</span>
+		</a>
+	</div>
+</article>

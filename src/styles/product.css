@@ -1,0 +1,106 @@
+.affiliate-product {
+	display: grid;
+	grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+	align-items: center;
+	gap: clamp(1.25rem, 4vw, 2.5rem);
+	overflow: hidden;
+	margin-block: 2.5rem;
+	border: 1px solid var(--color-border);
+	border-radius: 1.15rem;
+	background: var(--color-surface);
+	box-shadow: var(--shadow-soft);
+	padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.affiliate-product-image {
+	overflow: hidden;
+	border-radius: 0.9rem;
+	background: var(--color-surface-muted);
+	aspect-ratio: 4 / 3;
+}
+
+.affiliate-product-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.affiliate-product-content {
+	min-width: 0;
+}
+
+.affiliate-product-label {
+	margin: 0 0 0.25rem !important;
+	color: var(--color-primary);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.affiliate-product-name {
+	margin: 0 0 1.15rem !important;
+	color: var(--color-text);
+	font-size: clamp(1.2rem, 3vw, 1.6rem);
+	font-weight: 800;
+	letter-spacing: -0.035em;
+	line-height: 1.2;
+}
+
+.affiliate-product-button {
+	display: inline-flex;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	border-radius: 0.75rem;
+	background: var(--color-primary);
+	color: #fff !important;
+	padding: 0.7rem 1rem;
+	font-size: 0.9rem;
+	font-weight: 800;
+	text-decoration: none;
+	transition: background-color 150ms ease, translate 150ms ease;
+}
+
+.affiliate-product-button:hover {
+	background: var(--color-primary-hover);
+	translate: 0 -1px;
+}
+
+.affiliate-product-button:focus-visible {
+	outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+	outline-offset: 3px;
+}
+
+.affiliate-product-button svg {
+	width: 1.1rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2;
+}
+
+.affiliate-product-disclosure {
+	max-width: 34rem;
+	margin: 0.85rem 0 0 !important;
+	color: var(--color-text-muted);
+	font-size: 0.75rem;
+	line-height: 1.45;
+}
+
+@media (max-width: 560px) {
+	.affiliate-product {
+		grid-template-columns: 1fr;
+	}
+
+	.affiliate-product-image {
+		aspect-ratio: 16 / 10;
+	}
+
+	.affiliate-product-button {
+		width: 100%;
+	}
+}

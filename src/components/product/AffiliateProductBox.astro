@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	name: string;
+	image: ImageMetadata;
+	imageAlt: string;
+	affiliateUrl: string;
+	cta?: string;
+}
+
+const {
+	name,
+	image,
+	imageAlt,
+	affiliateUrl,
+	cta = 'Ver produto no Mercado Livre',
+} = Astro.props;
+---
+
+<aside class="affiliate-product" aria-label={`Oferta de ${name}`}>
+	<div class="affiliate-product-image">
+		<Image
+			src={image}
+			alt={imageAlt}
+			widths={[240, 360, 480]}
+			sizes="(max-width: 560px) 100vw, 240px"
+			loading="lazy"
+		/>
+	</div>
+
+	<div class="affiliate-product-content">
+		<p class="affiliate-product-label">Produto recomendado</p>
+		<p class="affiliate-product-name">{name}</p>
+		<a
+			class="affiliate-product-button"
+			href={affiliateUrl}
+			target="_blank"
+			rel="nofollow sponsored noopener"
+		>
+			<span>{cta}</span>
+			<svg viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M5 12h14M13 6l6 6-6 6" />
+			</svg>
+		</a>
+		<p class="affiliate-product-disclosure">
+			Link de afiliado: podemos receber uma comissão pela compra, sem custo adicional para você.
+		</p>
+	</div>
+</aside>

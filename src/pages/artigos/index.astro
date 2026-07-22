@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/article/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout
+	title="Artigos | Sky Vision"
+	description="Reviews, comparativos e guias de compra sobre celulares, computadores, áudio e outros eletrônicos."
+>
+	<header class="page-header container-shell">
+		<p class="section-kicker">Conteúdo Sky Vision</p>
+		<h1>Todos os artigos</h1>
+		<p>Informação direta para escolher e aproveitar melhor sua tecnologia.</p>
+	</header>
+
+	<section class="home-section container-shell" aria-label="Lista de artigos">
+		<div class="article-grid">
+			{articles.map((article) => <ArticleCard {article} />)}
+		</div>
+	</section>
+</BaseLayout>

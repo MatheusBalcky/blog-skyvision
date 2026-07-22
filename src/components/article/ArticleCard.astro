@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArticleMeta from './ArticleMeta.astro';
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="article-card">
+	<a class="article-card-image" href={`/artigos/${article.id}/`} tabindex="-1" aria-hidden="true">
+		<Image
+			src={article.data.cover}
+			alt=""
+			widths={[480, 720, 960]}
+			sizes="(max-width: 760px) 100vw, 36rem"
+			loading="lazy"
+		/>
+	</a>
+	<div class="article-card-body">
+		<ArticleMeta category={article.data.category} pubDate={article.data.pubDate} />
+		<h3><a href={`/artigos/${article.id}/`}>{article.data.title}</a></h3>
+		<p>{article.data.description}</p>
+		<a class="article-card-link" href={`/artigos/${article.id}/`} aria-label={`Ler: ${article.data.title}`}>
+			Ler artigo <span aria-hidden="true">→</span>
+		</a>
+	</div>
+</article>

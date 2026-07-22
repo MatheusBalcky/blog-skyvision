@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArticleMeta from '../components/article/ArticleMeta.astro';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = CollectionEntry<'articles'>['data'];
+
+const { title, description, pubDate, updatedDate, category, tags, cover, coverAlt, author } = Astro.props;
+const socialImage = new URL(cover.src, Astro.url);
+const articleUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: title,
+	description,
+	image: socialImage.href,
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	author: { '@type': 'Organization', name: author },
+	publisher: { '@type': 'Organization', name: 'Sky Vision' },
+	mainEntityOfPage: articleUrl.href,
+};
+---
+
+<BaseLayout title={`${title} | Sky Vision`} {description} image={socialImage} type="article">
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	<article class="article-page">
+		<header class="article-header container-shell">
+			<nav class="breadcrumb" aria-label="Navegação estrutural">
+				<a href="/">Início</a><span aria-hidden="true">/</span><span>{category}</span>
+			</nav>
+			<ArticleMeta {category} {pubDate} {author} />
+			<h1>{title}</h1>
+			<p class="article-lead">{description}</p>
+			<div class="article-tags" aria-label="Tags do artigo">
+				{tags.map((tag) => <span>{tag}</span>)}
+			</div>
+		</header>
+
+		<div class="article-cover container-shell">
+			<Image
+				src={cover}
+				alt={coverAlt}
+				widths={[720, 1080, 1440]}
+				sizes="(max-width: 760px) 100vw, 72rem"
+				loading="eager"
+				fetchpriority="high"
+			/>
+		</div>
+
+		<div class="article-content">
+			<slot />
+			{updatedDate && (
+				<p class="article-updated">
+					Atualizado em <time datetime={updatedDate.toISOString()}>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(updatedDate)}</time>.
+				</p>
+			)}
+		</div>
+	</article>
+</BaseLayout>

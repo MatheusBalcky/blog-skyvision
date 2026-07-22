@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/article/ArticleCard.astro';
+import FeaturedArticleCard from '../components/article/FeaturedArticleCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const featuredArticle = articles.find(({ data }) => data.featured) ?? articles[0];
+const latestArticles = articles.filter(({ id }) => id !== featuredArticle?.id).slice(0, 4);
+---
+
+<BaseLayout>
+	<section class="home-hero container-shell">
+		<p class="eyebrow">Tecnologia sem complicação</p>
+		<h1>Enxergue a tecnologia com uma nova <span>visão.</span></h1>
+		<p>
+			Reviews honestos, comparativos objetivos e guias de compra para ajudar você a escolher os
+			melhores eletrônicos.
+		</p>
+	</section>
+
+	{featuredArticle && (
+		<section class="home-section container-shell" aria-labelledby="featured-title">
+			<div class="section-heading">
+				<div>
+					<p class="section-kicker">Seleção Sky Vision</p>
+					<h2 id="featured-title">Leitura em destaque</h2>
+				</div>
+			</div>
+			<FeaturedArticleCard article={featuredArticle} />
+		</section>
+	)}
+
+	<section class="home-section container-shell" aria-labelledby="latest-title">
+		<div class="section-heading">
+			<div>
+				<p class="section-kicker">Atualizações</p>
+				<h2 id="latest-title">Artigos mais recentes</h2>
+			</div>
+			<a class="section-link" href="/artigos/">Ver todos <span aria-hidden="true">→</span></a>
+		</div>
+
+		<div class="article-grid">
+			{latestArticles.map((article) => <ArticleCard {article} />)}
+		</div>
+	</section>
+</BaseLayout>

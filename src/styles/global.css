@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./base.css";
+@import "./header.css";
+@import "./home.css";
+@import "./article.css";
+@import "./product.css";
+@import "./footer.css";

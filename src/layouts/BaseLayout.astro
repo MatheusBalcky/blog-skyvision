@@ -1,0 +1,46 @@
+---
+import Footer from '../components/layout/Footer.astro';
+import Header from '../components/layout/Header.astro';
+import MetaTags from '../components/seo/MetaTags.astro';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: URL;
+	image?: URL;
+	type?: 'website' | 'article';
+	noindex?: boolean;
+}
+
+const {
+	title = 'Sky Vision — Tecnologia com clareza',
+	description = 'Reviews, comparativos e guias de compra para você escolher eletrônicos com confiança.',
+	canonical,
+	image,
+	type = 'website',
+	noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<MetaTags {title} {description} {canonical} {image} {type} {noindex} />
+		<meta name="theme-color" content="#f6f9fc" />
+		<script is:inline>
+			(() => {
+				const savedTheme = localStorage.getItem('sky-vision-theme');
+				document.documentElement.dataset.theme = savedTheme === 'dark' ? 'dark' : 'light';
+			})();
+		</script>
+	</head>
+	<body>
+		<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+		<Header />
+		<main id="conteudo">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

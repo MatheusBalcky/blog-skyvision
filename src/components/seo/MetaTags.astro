@@ -1,0 +1,42 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	canonical?: URL;
+	image?: URL;
+	type?: 'website' | 'article';
+	noindex?: boolean;
+}
+
+const {
+	title,
+	description,
+	canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url),
+	image,
+	type = 'website',
+	noindex = false,
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content="Sky Vision" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{image && <meta property="og:image" content={image} />}
+{image && <meta property="og:image:alt" content={title} />}
+
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}
+{image && <meta name="twitter:image:alt" content={title} />}

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Identidade Visual Sky Vision"
+  short_description: "Preserva o design e a marca do Sky Vision"
+  brand_color: "#0EA5E9"
+  default_prompt: "Use $sky-vision-visual-identity para criar esta interface mantendo a identidade visual do Sky Vision."

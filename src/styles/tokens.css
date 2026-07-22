@@ -1,0 +1,39 @@
+@theme {
+	--font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+	--color-sky-vision-50: #f0f9ff;
+	--color-sky-vision-100: #e0f2fe;
+	--color-sky-vision-300: #7dd3fc;
+	--color-sky-vision-500: #0ea5e9;
+	--color-sky-vision-600: #0284c7;
+	--color-sky-vision-700: #0369a1;
+}
+
+:root {
+	color-scheme: light;
+	--color-primary: #0ea5e9;
+	--color-primary-hover: #0284c7;
+	--color-primary-soft: #e0f2fe;
+	--color-bg: #f6f9fc;
+	--color-surface: #ffffff;
+	--color-surface-muted: #edf4f8;
+	--color-text: #102331;
+	--color-text-muted: #587083;
+	--color-border: #d9e5ec;
+	--color-header: rgba(255, 255, 255, 0.94);
+	--shadow-soft: 0 12px 32px rgba(20, 80, 112, 0.08);
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--color-primary: #38bdf8;
+	--color-primary-hover: #7dd3fc;
+	--color-primary-soft: #0b3449;
+	--color-bg: #0b1218;
+	--color-surface: #111c24;
+	--color-surface-muted: #172731;
+	--color-text: #eef8fc;
+	--color-text-muted: #9eb3c0;
+	--color-border: #263a46;
+	--color-header: rgba(11, 18, 24, 0.94);
+	--shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
