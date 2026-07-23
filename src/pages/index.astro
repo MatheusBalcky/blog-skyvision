@@ -1,14 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleCard from '../components/article/ArticleCard.astro';
-import FeaturedArticleCard from '../components/article/FeaturedArticleCard.astro';
+import FeaturedCarousel from '../components/home/FeaturedCarousel.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const featuredArticle = articles.find(({ data }) => data.featured) ?? articles[0];
-const latestArticles = articles.filter(({ id }) => id !== featuredArticle?.id).slice(0, 4);
+const featuredArticles = articles.filter(({ data }) => data.featured).slice(0, 3);
+const carouselArticles = featuredArticles.length > 0 ? featuredArticles : articles.slice(0, 1);
+const featuredIds = new Set(carouselArticles.map(({ id }) => id));
+const latestArticles = articles.filter(({ id }) => !featuredIds.has(id)).slice(0, 6);
 ---
 
 <BaseLayout>
@@ -21,7 +23,7 @@ const latestArticles = articles.filter(({ id }) => id !== featuredArticle?.id).s
 		</p>
 	</section>
 
-	{featuredArticle && (
+	{carouselArticles.length > 0 && (
 		<section class="home-section container-shell" aria-labelledby="featured-title">
 			<div class="section-heading">
 				<div>
@@ -29,7 +31,7 @@ const latestArticles = articles.filter(({ id }) => id !== featuredArticle?.id).s
 					<h2 id="featured-title">Leitura em destaque</h2>
 				</div>
 			</div>
-			<FeaturedArticleCard article={featuredArticle} />
+			<FeaturedCarousel articles={carouselArticles} />
 		</section>
 	)}
 
@@ -42,7 +44,7 @@ const latestArticles = articles.filter(({ id }) => id !== featuredArticle?.id).s
 			<a class="section-link" href="/artigos/">Ver todos <span aria-hidden="true">→</span></a>
 		</div>
 
-		<div class="article-grid">
+		<div class="article-grid article-grid-home">
 			{latestArticles.map((article) => <ArticleCard {article} />)}
 		</div>
 	</section>

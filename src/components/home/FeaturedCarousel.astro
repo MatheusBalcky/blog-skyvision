@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FeaturedArticleCard from '../article/FeaturedArticleCard.astro';
+
+interface Props {
+	articles: CollectionEntry<'articles'>[];
+}
+
+const { articles } = Astro.props;
+---
+
+<div
+	class="featured-carousel"
+	role="region"
+	aria-label="Leituras em destaque"
+	aria-roledescription="carrossel"
+	tabindex="0"
+>
+	<div class="featured-carousel-viewport">
+		<div class="featured-carousel-track">
+			{
+				articles.map((article, index) => (
+					<div
+						class="featured-carousel-slide"
+						aria-hidden={index === 0 ? 'false' : 'true'}
+						inert={index === 0 ? undefined : true}
+						data-carousel-slide
+					>
+						<FeaturedArticleCard {article} eager={index === 0} />
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	{
+		articles.length > 1 && (
+			<div class="featured-carousel-controls">
+				<button class="carousel-arrow" type="button" data-carousel-previous aria-label="Destaque anterior">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6" /></svg>
+				</button>
+
+				<div class="carousel-dots" aria-label="Selecionar destaque">
+					{articles.map((article, index) => (
+						<button
+							type="button"
+							data-carousel-dot={index}
+							aria-label={`Mostrar destaque ${index + 1}: ${article.data.title}`}
+							aria-current={index === 0 ? 'true' : undefined}
+						/>
+					))}
+				</div>
+
+				<p class="sr-only" aria-live="polite" data-carousel-status>
+					Destaque 1 de {articles.length}
+				</p>
+
+				<button class="carousel-arrow" type="button" data-carousel-next aria-label="Próximo destaque">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+				</button>
+			</div>
+		)
+	}
+</div>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.featured-carousel').forEach((carousel) => {
+		const track = carousel.querySelector<HTMLElement>('.featured-carousel-track');
+		const slides = [...carousel.querySelectorAll<HTMLElement>('[data-carousel-slide]')];
+		const dots = [...carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]')];
+		const previous = carousel.querySelector<HTMLButtonElement>('[data-carousel-previous]');
+		const next = carousel.querySelector<HTMLButtonElement>('[data-carousel-next]');
+		const status = carousel.querySelector<HTMLElement>('[data-carousel-status]');
+		let currentIndex = 0;
+
+		const showSlide = (newIndex: number) => {
+			if (!track || slides.length === 0) return;
+
+			currentIndex = (newIndex + slides.length) % slides.length;
+			track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+			slides.forEach((slide, index) => {
+				const isActive = index === currentIndex;
+				slide.setAttribute('aria-hidden', String(!isActive));
+				slide.inert = !isActive;
+			});
+
+			dots.forEach((dot, index) => {
+				if (index === currentIndex) {
+					dot.setAttribute('aria-current', 'true');
+				} else {
+					dot.removeAttribute('aria-current');
+				}
+			});
+
+			if (status) {
+				status.textContent = `Destaque ${currentIndex + 1} de ${slides.length}`;
+			}
+		};
+
+		previous?.addEventListener('click', () => showSlide(currentIndex - 1));
+		next?.addEventListener('click', () => showSlide(currentIndex + 1));
+		dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
+
+		carousel.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowLeft') {
+				event.preventDefault();
+				showSlide(currentIndex - 1);
+			}
+
+			if (event.key === 'ArrowRight') {
+				event.preventDefault();
+				showSlide(currentIndex + 1);
+			}
+		});
+
+		showSlide(0);
+	});
+</script>

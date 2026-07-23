@@ -5,9 +5,10 @@ import ArticleMeta from './ArticleMeta.astro';
 
 interface Props {
 	article: CollectionEntry<'articles'>;
+	eager?: boolean;
 }
 
-const { article } = Astro.props;
+const { article, eager = false } = Astro.props;
 ---
 
 <article class="featured-article">
@@ -17,8 +18,8 @@ const { article } = Astro.props;
 			alt=""
 			widths={[640, 960, 1280]}
 			sizes="(max-width: 820px) 100vw, 55vw"
-			loading="eager"
-			fetchpriority="high"
+			loading={eager ? 'eager' : 'lazy'}
+			fetchpriority={eager ? 'high' : undefined}
 		/>
 	</a>
 	<div class="featured-article-body">

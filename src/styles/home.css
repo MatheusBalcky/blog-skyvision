@@ -95,7 +95,7 @@
 
 .featured-article {
 	display: grid;
-	grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
+	grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
 	overflow: hidden;
 	border: 1px solid var(--color-border);
 	border-radius: 1.15rem;
@@ -105,7 +105,7 @@
 
 .featured-article-image {
 	display: block;
-	min-height: 25rem;
+	min-height: 19rem;
 	overflow: hidden;
 }
 
@@ -126,7 +126,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
-	padding: clamp(1.75rem, 4vw, 3.5rem);
+	padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .featured-label {
@@ -163,7 +163,7 @@
 
 .featured-article h2 {
 	margin: 0.9rem 0 0;
-	font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+	font-size: clamp(1.6rem, 2.8vw, 2.15rem);
 	letter-spacing: -0.045em;
 	line-height: 1.08;
 }
@@ -182,6 +182,111 @@
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1.5rem;
+}
+
+.article-grid-home {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.15rem;
+}
+
+.article-grid-home .article-card-body {
+	padding: 1.15rem;
+}
+
+.article-grid-home .article-card h3 {
+	font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+}
+
+.featured-carousel {
+	outline: none;
+}
+
+.featured-carousel:focus-visible {
+	border-radius: 1.15rem;
+	outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+	outline-offset: 4px;
+}
+
+.featured-carousel-viewport {
+	overflow: hidden;
+	border-radius: 1.15rem;
+}
+
+.featured-carousel-track {
+	display: flex;
+	transition: transform 300ms ease;
+}
+
+.featured-carousel-slide {
+	display: flex;
+	flex: 0 0 100%;
+	min-width: 0;
+}
+
+.featured-carousel-slide .featured-article {
+	width: 100%;
+}
+
+.featured-carousel-controls {
+	display: flex;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.carousel-arrow {
+	display: grid;
+	width: 2.75rem;
+	height: 2.75rem;
+	place-items: center;
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
+	background: var(--color-surface);
+	color: var(--color-text);
+	cursor: pointer;
+}
+
+.carousel-arrow:hover {
+	border-color: var(--color-primary);
+	color: var(--color-primary);
+}
+
+.carousel-arrow:focus-visible,
+.carousel-dots button:focus-visible {
+	outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+	outline-offset: 3px;
+}
+
+.carousel-arrow svg {
+	width: 1.15rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2;
+}
+
+.carousel-dots {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.carousel-dots button {
+	width: 0.65rem;
+	height: 0.65rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--color-border);
+	padding: 0;
+	cursor: pointer;
+	transition: width 150ms ease, background-color 150ms ease;
+}
+
+.carousel-dots button[aria-current="true"] {
+	width: 1.6rem;
+	background: var(--color-primary);
 }
 
 .article-card {
@@ -272,5 +377,11 @@
 
 	.section-heading > p {
 		margin-top: 0.35rem;
+	}
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+	.article-grid-home {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
