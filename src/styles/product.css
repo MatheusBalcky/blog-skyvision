@@ -27,7 +27,9 @@
 }
 
 .affiliate-product-content {
-	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .affiliate-product-label {
@@ -89,6 +91,12 @@
 	color: var(--color-text-muted);
 	font-size: 0.75rem;
 	line-height: 1.45;
+}
+
+.affiliate-product-unavailable {
+	margin: 0 !important;
+	color: var(--color-text-muted);
+	font-size: 0.9rem;
 }
 
 @media (max-width: 560px) {

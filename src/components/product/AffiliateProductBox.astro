@@ -6,7 +6,8 @@ interface Props {
 	name: string;
 	image: ImageMetadata;
 	imageAlt: string;
-	affiliateUrl: string;
+	affiliateUrl?: string;
+	affiliateStore?: string;
 	cta?: string;
 }
 
@@ -15,8 +16,10 @@ const {
 	image,
 	imageAlt,
 	affiliateUrl,
-	cta = 'Ver produto no Mercado Livre',
+	affiliateStore = 'Mercado Livre',
+	cta = `Ver produto no ${affiliateStore}`,
 } = Astro.props;
+const hasAffiliateLink = Boolean(affiliateUrl?.trim());
 ---
 
 <aside class="affiliate-product" aria-label={`Oferta de ${name}`}>
@@ -33,19 +36,27 @@ const {
 	<div class="affiliate-product-content">
 		<p class="affiliate-product-label">Produto recomendado</p>
 		<p class="affiliate-product-name">{name}</p>
-		<a
-			class="affiliate-product-button"
-			href={affiliateUrl}
-			target="_blank"
-			rel="nofollow sponsored noopener"
-		>
-			<span>{cta}</span>
-			<svg viewBox="0 0 24 24" aria-hidden="true">
-				<path d="M5 12h14M13 6l6 6-6 6" />
-			</svg>
-		</a>
-		<p class="affiliate-product-disclosure">
-			Link de afiliado: podemos receber uma comissão pela compra, sem custo adicional para você.
-		</p>
+		{
+			hasAffiliateLink ? (
+				<>
+					<a
+						class="affiliate-product-button"
+						href={affiliateUrl}
+						target="_blank"
+						rel="nofollow sponsored noopener"
+					>
+						<span>{cta}</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M5 12h14M13 6l6 6-6 6" />
+						</svg>
+					</a>
+					<p class="affiliate-product-disclosure">
+						Link de afiliado: podemos receber uma comissão pela compra, sem custo adicional para você.
+					</p>
+				</>
+			) : (
+				<p class="affiliate-product-unavailable">Link de compra ainda não disponível.</p>
+			)
+		}
 	</div>
 </aside>

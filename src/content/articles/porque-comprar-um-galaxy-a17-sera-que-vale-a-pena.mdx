@@ -4,6 +4,7 @@ description: 'Descubra as razões para comprar um dos melhores custo-benefício:
 pubDate: 2026-07-23
 category: 'Celulares'
 tags: ['celulares', 'guia de compra']
+products: ['samsung-galaxy-a17']
 cover: '../../assets/articles/smartphones/galaxy-a17/capa.png'
 coverAlt: 'Exposição do galaxy A17 em várias posições.'
 author: 'Equipe Sky Vision'
@@ -12,8 +13,7 @@ featured: true
 draft: false
 ---
 
-import AffiliateProductBox from '../../components/product/AffiliateProductBox.astro';
-import productImage from '../../assets/articles/smartphones/galaxy-a17/capa.png';
+import ProductOffer from '../../components/product/ProductOffer.astro';
 import { Image } from 'astro:assets';
 import oqueVemNaCaixa from '../../assets/articles/smartphones/galaxy-a17/o-que-vem-na-caixa.png'
 
@@ -27,13 +27,7 @@ Mais do que uma ficha técnica interessante, o Galaxy A17 entrega uma experiênc
 
 Neste artigo, você vai entender por que o Galaxy A17 é considerado um dos melhores celulares custo-benefício de 2026.
 
-<AffiliateProductBox
-  name="Samsung Galaxy A17"
-  image={productImage}
-  imageAlt="Celular na cor azul visto de frente e de costas"
-  affiliateUrl="https://meli.la/1n894Em"
-  cta="Ver produto no Mercado Livre"
-/>
+<ProductOffer productId="samsung-galaxy-a17" />
 
 ## Samsung continua sendo referência no mercado Android
 
