@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ArticleCard from '../components/article/ArticleCard.astro';
+import type { Category } from '../data/categories';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	category: Category;
+	articles: CollectionEntry<'articles'>[];
+}
+
+const { category, articles } = Astro.props;
+---
+
+<BaseLayout
+	title={`${category.name} | Sky Vision`}
+	description={`${category.description} Confira os artigos do Sky Vision.`}
+>
+	<header class="page-header container-shell">
+		<p class="section-kicker">Categoria</p>
+		<h1>{category.name}</h1>
+		<p>{category.description}</p>
+	</header>
+
+	<section class="home-section container-shell" aria-label={`Artigos sobre ${category.name}`}>
+		{
+			articles.length > 0 ? (
+				<div class="article-grid">
+					{articles.map((article) => <ArticleCard {article} />)}
+				</div>
+			) : (
+				<div class="empty-state">
+					<h2>Novos conteúdos em preparação</h2>
+					<p>Ainda não publicamos artigos nesta categoria. Em breve haverá novidades por aqui.</p>
+					<a class="primary-link" href="/artigos/">Ver todos os artigos</a>
+				</div>
+			)
+		}
+	</section>
+</BaseLayout>

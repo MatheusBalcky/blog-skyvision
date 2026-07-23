@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { categoryNames } from './data/categories';
 
 const articles = defineCollection({
 	loader: glob({ base: './src/content/articles', pattern: '**/*.mdx' }),
@@ -10,7 +11,7 @@ const articles = defineCollection({
 			description: z.string().min(40).max(180),
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			category: z.string().min(2),
+			category: z.enum(categoryNames),
 			tags: z.array(z.string()).min(1),
 			cover: image(),
 			coverAlt: z.string().min(10),

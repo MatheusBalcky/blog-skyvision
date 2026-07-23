@@ -25,14 +25,15 @@ const jsonLd = {
 
 <BaseLayout title={`${title} | Sky Vision`} {description} image={socialImage} type="article">
 	<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-	<article class="article-page">
+	<article class="article-page" data-pagefind-body>
 		<header class="article-header container-shell">
 			<nav class="breadcrumb" aria-label="Navegação estrutural">
 				<a href="/">Início</a><span aria-hidden="true">/</span><span>{category}</span>
 			</nav>
 			<ArticleMeta {category} {pubDate} {author} />
-			<h1>{title}</h1>
-			<p class="article-lead">{description}</p>
+			<h1 data-pagefind-meta="title">{title}</h1>
+			<p class="article-lead" data-pagefind-meta="description">{description}</p>
+			<span class="sr-only" data-pagefind-meta="category">{category}</span>
 			<div class="article-tags" aria-label="Tags do artigo">
 				{tags.map((tag) => <span>{tag}</span>)}
 			</div>

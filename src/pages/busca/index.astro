@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).map((article) => ({
+	title: article.data.title,
+	description: article.data.description,
+	category: article.data.category,
+	tags: article.data.tags,
+	url: `/artigos/${article.id}/`,
+}));
+---
+
+<BaseLayout
+	title="Buscar artigos | Sky Vision"
+	description="Encontre reviews, comparativos e guias de compra publicados no Sky Vision."
+	noindex
+>
+	<section class="search-page">
+		<div class="container-shell search-shell">
+			<header class="search-header">
+				<h1>Buscar no Sky Vision</h1>
+				<p>Pesquise produtos, categorias ou assuntos para encontrar artigos relacionados.</p>
+			</header>
+
+			<form class="search-form" role="search">
+				<label class="sr-only" for="site-search">Pesquisar nos artigos</label>
+				<input
+					class="search-input"
+					id="site-search"
+					name="q"
+					type="search"
+					placeholder="Ex.: celular, notebook ou fone Bluetooth"
+					autocomplete="off"
+				/>
+				<button class="search-submit" type="submit">Pesquisar</button>
+			</form>
+
+			<p class="search-status" aria-live="polite"></p>
+			<div class="search-results"></div>
+		</div>
+	</section>
+</BaseLayout>
+
+<script define:vars={{ fallbackArticles: articles }} is:inline>
+	const form = document.querySelector('.search-form');
+	const input = document.querySelector('#site-search');
+	const status = document.querySelector('.search-status');
+	const resultsContainer = document.querySelector('.search-results');
+	let pagefind;
+
+	const normalize = (value) =>
+		value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+	const createResult = ({ url, title, description, category }) => {
+		const article = document.createElement('article');
+		article.className = 'search-result';
+
+		const categoryElement = document.createElement('p');
+		categoryElement.className = 'search-result-category';
+		categoryElement.textContent = category || 'Artigo';
+
+		const heading = document.createElement('h2');
+		const link = document.createElement('a');
+		link.href = url;
+		link.textContent = title;
+		heading.append(link);
+
+		const excerpt = document.createElement('p');
+		excerpt.className = 'search-result-description';
+		excerpt.textContent = description;
+
+		article.append(categoryElement, heading, excerpt);
+		return article;
+	};
+
+	const fallbackSearch = (query) => {
+		const normalizedQuery = normalize(query);
+		return fallbackArticles
+			.filter((article) =>
+				normalize([
+					article.title,
+					article.description,
+					article.category,
+					...article.tags,
+				].join(' ')).includes(normalizedQuery)
+			)
+			.map((article) => ({
+				url: article.url,
+				title: article.title,
+				description: article.description,
+				category: article.category,
+			}));
+	};
+
+	const pagefindSearch = async (query) => {
+		try {
+			pagefind ??= await import('/pagefind/pagefind.js');
+			await pagefind.init();
+			const response = await pagefind.search(query);
+			const entries = await Promise.all(response.results.map((result) => result.data()));
+			return entries.map((entry) => ({
+				url: entry.url,
+				title: entry.meta.title,
+				description: entry.meta.description || entry.excerpt.replace(/<[^>]*>/g, ''),
+				category: entry.meta.category || 'Artigo',
+			}));
+		} catch {
+			return fallbackSearch(query);
+		}
+	};
+
+	const search = async (query) => {
+		resultsContainer.replaceChildren();
+
+		if (!query.trim()) {
+			status.textContent = 'Digite um termo para começar a pesquisa.';
+			return;
+		}
+
+		status.textContent = 'Pesquisando…';
+		const results = await pagefindSearch(query.trim());
+		status.textContent = results.length === 1
+			? '1 artigo encontrado.'
+			: `${results.length} artigos encontrados.`;
+		resultsContainer.append(...results.map(createResult));
+	};
+
+	form.addEventListener('submit', (event) => {
+		event.preventDefault();
+		const query = input.value.trim();
+		const url = new URL(window.location.href);
+		query ? url.searchParams.set('q', query) : url.searchParams.delete('q');
+		history.replaceState({}, '', url);
+		search(query);
+	});
+
+	const initialQuery = new URLSearchParams(window.location.search).get('q') || '';
+	input.value = initialQuery;
+	search(initialQuery);
+	input.focus();
+</script>

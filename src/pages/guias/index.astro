@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/article/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const guides = (await getCollection(
+	'articles',
+	({ data }) => !data.draft && data.type === 'guide',
+)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+	title="Guias de compra | Sky Vision"
+	description="Guias práticos para comparar produtos eletrônicos e escolher a melhor opção para sua rotina."
+>
+	<header class="page-header container-shell">
+		<p class="section-kicker">Conteúdo por formato</p>
+		<h1>Guias de compra</h1>
+		<p>Critérios claros e recomendações práticas para você tomar decisões melhores.</p>
+	</header>
+
+	<section class="home-section container-shell" aria-label="Guias de compra">
+		<div class="article-grid">
+			{guides.map((article) => <ArticleCard {article} />)}
+		</div>
+	</section>
+</BaseLayout>

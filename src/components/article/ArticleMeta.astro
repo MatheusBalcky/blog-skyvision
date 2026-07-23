@@ -1,11 +1,14 @@
 ---
+import { getCategoryByName, type CategoryName } from '../../data/categories';
+
 interface Props {
-	category: string;
+	category: CategoryName;
 	pubDate: Date;
 	author?: string;
 }
 
 const { category, pubDate, author } = Astro.props;
+const categoryDefinition = getCategoryByName(category);
 const formattedDate = new Intl.DateTimeFormat('pt-BR', {
 	day: '2-digit',
 	month: 'long',
@@ -15,7 +18,11 @@ const formattedDate = new Intl.DateTimeFormat('pt-BR', {
 ---
 
 <div class="article-meta">
-	<span class="article-category">{category}</span>
+	{
+		categoryDefinition
+			? <a class="article-category" href={`/categorias/${categoryDefinition.slug}/`}>{category}</a>
+			: <span class="article-category">{category}</span>
+	}
 	<span aria-hidden="true">•</span>
 	<time datetime={pubDate.toISOString()}>{formattedDate}</time>
 	{author && <span aria-hidden="true">•</span>}
