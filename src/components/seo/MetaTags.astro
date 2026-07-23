@@ -8,11 +8,12 @@ interface Props {
 	noindex?: boolean;
 }
 
+const usesDefaultImage = !Astro.props.image;
 const {
 	title,
 	description,
 	canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url),
-	image,
+	image = new URL('/sky-vision-social.png', Astro.site ?? Astro.url),
 	type = 'website',
 	noindex = false,
 } = Astro.props;
@@ -21,6 +22,9 @@ const {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
@@ -32,11 +36,13 @@ const {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-{image && <meta property="og:image" content={image} />}
-{image && <meta property="og:image:alt" content={title} />}
+<meta property="og:image" content={image} />
+{usesDefaultImage && <meta property="og:image:width" content="1200" />}
+{usesDefaultImage && <meta property="og:image:height" content="630" />}
+<meta property="og:image:alt" content={title} />
 
-<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-{image && <meta name="twitter:image" content={image} />}
-{image && <meta name="twitter:image:alt" content={title} />}
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={title} />

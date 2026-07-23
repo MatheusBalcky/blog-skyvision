@@ -24,7 +24,7 @@ const jsonLd = {
 ---
 
 <BaseLayout title={`${title} | Sky Vision`} {description} image={socialImage} type="article">
-	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<article class="article-page">
 		<header class="article-header container-shell">
 			<nav class="breadcrumb" aria-label="Navegação estrutural">

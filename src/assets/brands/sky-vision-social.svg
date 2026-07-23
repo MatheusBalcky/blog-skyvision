@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+	<defs>
+		<linearGradient id="background" x1="90" y1="40" x2="1100" y2="610" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FFFFFF"/>
+			<stop offset="1" stop-color="#E0F2FE"/>
+		</linearGradient>
+		<linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1">
+			<stop stop-color="#7DD3FC"/>
+			<stop offset="1" stop-color="#0284C7"/>
+		</linearGradient>
+		<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+			<feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#145070" flood-opacity=".13"/>
+		</filter>
+	</defs>
+
+	<rect width="1200" height="630" fill="url(#background)"/>
+	<circle cx="1090" cy="80" r="250" fill="#0EA5E9" opacity=".07"/>
+	<circle cx="1100" cy="570" r="330" fill="#7DD3FC" opacity=".12"/>
+	<path d="M0 500C240 420 360 650 650 560s350-220 550-120v190H0Z" fill="#0EA5E9" opacity=".055"/>
+
+	<g transform="translate(92 94)">
+		<g transform="scale(1.75)" fill="none" stroke="url(#orbit)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+			<path d="M7 25.5C12 16.4 19.2 12 28.4 12c5.2 0 9.4 1.5 12.6 4.4-5 9-12.2 13.6-21.4 13.6-5.2 0-9.4-1.5-12.6-4.5Z"/>
+			<path d="M14 7.5c4.8 1.4 9.7 5.6 14.6 12.5 4.8 6.9 6.6 13.1 5.4 18.5-4.9-1.4-9.7-5.6-14.6-12.5C14.6 19.1 12.8 13 14 7.5Z"/>
+			<circle cx="24" cy="21" r="3.5" fill="#0EA5E9" stroke="none"/>
+		</g>
+	</g>
+
+	<text x="92" y="245" fill="#102331" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="88" font-weight="400" letter-spacing="-5">Sky</text>
+	<text x="240" y="245" fill="#0EA5E9" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="88" font-weight="800" letter-spacing="-5">Vision</text>
+	<text x="96" y="315" fill="#587083" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="500">Tecnologia com clareza.</text>
+	<text x="96" y="375" fill="#102331" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="25" font-weight="600">Escolha eletrônicos com mais confiança.</text>
+
+	<g transform="translate(96 430)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+		<rect width="128" height="48" rx="24" fill="#FFFFFF" stroke="#D9E5EC"/>
+		<text x="64" y="31" fill="#0284C7" text-anchor="middle">Reviews</text>
+		<rect x="144" width="174" height="48" rx="24" fill="#FFFFFF" stroke="#D9E5EC"/>
+		<text x="231" y="31" fill="#0284C7" text-anchor="middle">Comparativos</text>
+		<rect x="334" width="198" height="48" rx="24" fill="#FFFFFF" stroke="#D9E5EC"/>
+		<text x="433" y="31" fill="#0284C7" text-anchor="middle">Guias de compra</text>
+	</g>
+
+	<g transform="translate(760 100)" filter="url(#shadow)">
+		<rect width="330" height="330" rx="78" fill="#102331"/>
+		<g transform="translate(30 30) scale(5.65)" fill="none" stroke="url(#orbit)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.45">
+			<path d="M7 25.5C12 16.4 19.2 12 28.4 12c5.2 0 9.4 1.5 12.6 4.4-5 9-12.2 13.6-21.4 13.6-5.2 0-9.4-1.5-12.6-4.5Z"/>
+			<path d="M14 7.5c4.8 1.4 9.7 5.6 14.6 12.5 4.8 6.9 6.6 13.1 5.4 18.5-4.9-1.4-9.7-5.6-14.6-12.5C14.6 19.1 12.8 13 14 7.5Z"/>
+			<circle cx="24" cy="21" r="3.2" fill="#F6F9FC" stroke="none"/>
+		</g>
+	</g>
+
+	<text x="1098" y="563" fill="#587083" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" text-anchor="end">skyvisioncompany.com.br</text>
+</svg>
