@@ -44,7 +44,7 @@ const latestArticles = articles.filter(({ id }) => !featuredIds.has(id)).slice(0
 			<a class="section-link" href="/artigos/">Ver todos <span aria-hidden="true">→</span></a>
 		</div>
 
-		<div class="article-grid article-grid-home">
+		<div class="article-grid article-grid-compact">
 			{latestArticles.map((article) => <ArticleCard {article} />)}
 		</div>
 	</section>

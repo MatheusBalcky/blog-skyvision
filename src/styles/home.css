@@ -184,16 +184,16 @@
 	gap: 1.5rem;
 }
 
-.article-grid-home {
+.article-grid-compact {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 1.15rem;
 }
 
-.article-grid-home .article-card-body {
+.article-grid-compact .article-card-body {
 	padding: 1.15rem;
 }
 
-.article-grid-home .article-card h3 {
+.article-grid-compact .article-card h3 {
 	font-size: clamp(1.1rem, 1.8vw, 1.3rem);
 }
 
@@ -380,8 +380,8 @@
 	}
 }
 
-@media (min-width: 761px) and (max-width: 980px) {
-	.article-grid-home {
+@media (min-width: 600px) and (max-width: 980px) {
+	.article-grid-compact {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
