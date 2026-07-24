@@ -31,6 +31,10 @@
 	font-weight: 800;
 }
 
+.brand:hover {
+	color: var(--color-primary-hover);
+}
+
 .brand-mark {
 	width: 2.65rem;
 	color: var(--color-primary);
@@ -64,7 +68,8 @@
 	transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
 }
 
-.icon-button:hover {
+.icon-button:hover,
+.icon-button:focus-visible {
 	border-color: var(--color-primary);
 	color: var(--color-primary);
 }
@@ -124,6 +129,7 @@
 }
 
 .category-list a:hover,
+.category-list a:focus-visible,
 .category-list a[aria-current="page"] {
 	border-bottom-color: var(--color-primary);
 	color: var(--color-primary);
@@ -170,6 +176,7 @@
 	}
 
 	.mobile-home-link:hover,
+	.mobile-home-link:focus-visible,
 	.mobile-home-link[aria-current="page"] {
 		border-color: var(--color-border);
 		background: var(--color-primary-soft);
@@ -198,6 +205,12 @@
 		font-size: 0.9rem;
 		font-weight: 750;
 		cursor: pointer;
+	}
+
+	.category-menu-button:hover,
+	.category-menu-button:focus-visible {
+		background: var(--color-primary-soft);
+		color: var(--color-primary);
 	}
 
 	.category-menu-button svg {
@@ -238,6 +251,7 @@
 	}
 
 	.category-list a:hover,
+	.category-list a:focus-visible,
 	.category-list a[aria-current="page"] {
 		border-color: var(--color-border);
 		background: var(--color-primary-soft);

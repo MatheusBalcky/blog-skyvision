@@ -25,6 +25,11 @@ a {
 	-webkit-tap-highlight-color: transparent;
 }
 
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+	outline: 3px solid var(--color-primary);
+	outline-offset: 3px;
+}
+
 svg {
 	display: block;
 }

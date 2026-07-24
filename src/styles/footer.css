@@ -26,6 +26,10 @@
 	font-weight: 800;
 }
 
+.footer-brand:hover {
+	color: var(--color-primary-hover);
+}
+
 .footer-grid p,
 .footer-bottom p {
 	margin: 0.75rem 0 0;
@@ -44,7 +48,8 @@
 	text-decoration: none;
 }
 
-.footer-grid nav a:hover {
+.footer-grid nav a:hover,
+.footer-grid nav a:focus-visible {
 	color: var(--color-primary);
 }
 
