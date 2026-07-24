@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skyvisioncompany.com.br/sitemap-index.xml
