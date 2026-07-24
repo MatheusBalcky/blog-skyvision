@@ -1,4 +1,5 @@
 .astro/
+.frontmatter/database/
 dist/
 node_modules/
 public/pagefind/

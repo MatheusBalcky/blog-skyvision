@@ -1,0 +1,160 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.git.enabled": false,
+  "frontMatter.validation.enabled": true,
+  "frontMatter.content.defaultFileType": "mdx",
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets/articles",
+    "relative": true
+  },
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Artigos Sky Vision",
+      "path": "[[workspace]]/src/content/articles",
+      "contentTypes": ["default"],
+      "previewPath": "/artigos",
+      "trailingSlash": true,
+      "slugTemplate": "{{title}}"
+    }
+  ],
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.preview.trailingSlash": true,
+  "frontMatter.site.baseURL": "https://skyvisioncompany.com.br",
+  "frontMatter.taxonomy.alignFilename": true,
+  "frontMatter.taxonomy.dateFormat": "yyyy-MM-dd",
+  "frontMatter.taxonomy.seoTitleField": "title",
+  "frontMatter.taxonomy.seoTitleLength": 90,
+  "frontMatter.taxonomy.seoDescriptionField": "description",
+  "frontMatter.taxonomy.seoDescriptionLength": 180,
+  "frontMatter.templates.enabled": true,
+  "frontMatter.templates.folder": ".frontmatter/templates",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "fileType": "mdx",
+      "defaultFileName": "{{title}}",
+      "slugTemplate": "{{title}}",
+      "template": "[[workspace]]/.frontmatter/templates/artigo-sky-vision.mdx",
+      "previewPath": "/artigos",
+      "trailingSlash": true,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Título",
+          "name": "title",
+          "type": "string",
+          "single": true,
+          "required": true,
+          "description": "Título editorial único, entre 10 e 90 caracteres."
+        },
+        {
+          "title": "Descrição",
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "description": "Resumo único usado no SEO e nos cards, entre 40 e 180 caracteres."
+        },
+        {
+          "title": "Data de publicação",
+          "name": "pubDate",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true,
+          "dateFormat": "yyyy-MM-dd",
+          "required": true
+        },
+        {
+          "title": "Data de atualização",
+          "name": "updatedDate",
+          "type": "datetime",
+          "isModifiedDate": true,
+          "dateFormat": "yyyy-MM-dd",
+          "description": "Preencha somente quando houver uma atualização relevante."
+        },
+        {
+          "title": "Categoria",
+          "name": "category",
+          "type": "choice",
+          "choices": ["Celulares", "Computadores", "Áudio e vídeo", "Periféricos", "Smart Home"],
+          "required": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags",
+          "required": true,
+          "description": "Adicione pelo menos uma tag relacionada ao conteúdo."
+        },
+        {
+          "title": "Produtos relacionados",
+          "name": "products",
+          "type": "list",
+          "default": [],
+          "description": "Use o ID do arquivo em src/content/products, sem a extensão."
+        },
+        {
+          "title": "Imagem de capa",
+          "name": "cover",
+          "type": "image",
+          "isPreviewImage": true,
+          "required": true,
+          "description": "Selecione uma imagem em src/assets/articles, preferencialmente em 16:9."
+        },
+        {
+          "title": "Texto alternativo da capa",
+          "name": "coverAlt",
+          "type": "string",
+          "required": true,
+          "description": "Descreva objetivamente o conteúdo visual da capa."
+        },
+        {
+          "title": "Autor",
+          "name": "author",
+          "type": "string",
+          "single": true,
+          "default": "Equipe Sky Vision",
+          "required": true
+        },
+        {
+          "title": "Tipo de conteúdo",
+          "name": "type",
+          "type": "choice",
+          "choices": [
+            {
+              "id": "article",
+              "title": "Artigo"
+            },
+            {
+              "id": "review",
+              "title": "Review"
+            },
+            {
+              "id": "guide",
+              "title": "Guia"
+            },
+            {
+              "id": "comparison",
+              "title": "Comparativo"
+            }
+          ],
+          "default": "article",
+          "required": true
+        },
+        {
+          "title": "Leitura em destaque",
+          "name": "featured",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "title": "Rascunho",
+          "name": "draft",
+          "type": "draft",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
