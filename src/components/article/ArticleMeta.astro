@@ -19,9 +19,13 @@ const formattedDate = new Intl.DateTimeFormat('pt-BR', {
 
 <div class="article-meta">
 	{
-		categoryDefinition
-			? <a class="article-category" href={`/categorias/${categoryDefinition.slug}/`}>{category}</a>
-			: <span class="article-category">{category}</span>
+		categoryDefinition ? (
+			<a class="article-category" href={`/categorias/${categoryDefinition.slug}/`}>
+				{category}
+			</a>
+		) : (
+			<span class="article-category">{category}</span>
+		)
 	}
 	<span aria-hidden="true">•</span>
 	<time datetime={pubDate.toISOString()}>{formattedDate}</time>

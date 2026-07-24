@@ -37,7 +37,9 @@ const { articles } = Astro.props;
 		articles.length > 1 && (
 			<div class="featured-carousel-controls">
 				<button class="carousel-arrow" type="button" data-carousel-previous aria-label="Destaque anterior">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6" /></svg>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="m15 6-6 6 6 6" />
+					</svg>
 				</button>
 
 				<div class="carousel-dots" aria-label="Selecionar destaque">
@@ -56,7 +58,9 @@ const { articles } = Astro.props;
 				</p>
 
 				<button class="carousel-arrow" type="button" data-carousel-next aria-label="Próximo destaque">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="m9 6 6 6-6 6" />
+					</svg>
 				</button>
 			</div>
 		)

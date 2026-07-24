@@ -65,7 +65,10 @@
 	background: var(--color-surface);
 	color: var(--color-text);
 	cursor: pointer;
-	transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
+	transition:
+		border-color 150ms ease,
+		color 150ms ease,
+		background-color 150ms ease;
 }
 
 .icon-button:hover,
@@ -84,11 +87,11 @@
 }
 
 .moon-icon,
-:root[data-theme="dark"] .sun-icon {
+:root[data-theme='dark'] .sun-icon {
 	display: none;
 }
 
-:root[data-theme="dark"] .moon-icon {
+:root[data-theme='dark'] .moon-icon {
 	display: block;
 }
 
@@ -130,7 +133,7 @@
 
 .category-list a:hover,
 .category-list a:focus-visible,
-.category-list a[aria-current="page"] {
+.category-list a[aria-current='page'] {
 	border-bottom-color: var(--color-primary);
 	color: var(--color-primary);
 }
@@ -177,7 +180,7 @@
 
 	.mobile-home-link:hover,
 	.mobile-home-link:focus-visible,
-	.mobile-home-link[aria-current="page"] {
+	.mobile-home-link[aria-current='page'] {
 		border-color: var(--color-border);
 		background: var(--color-primary-soft);
 		color: var(--color-primary);
@@ -223,7 +226,7 @@
 		transition: rotate 150ms ease;
 	}
 
-	.category-menu-button[aria-expanded="true"] svg {
+	.category-menu-button[aria-expanded='true'] svg {
 		rotate: 180deg;
 	}
 
@@ -252,7 +255,7 @@
 
 	.category-list a:hover,
 	.category-list a:focus-visible,
-	.category-list a[aria-current="page"] {
+	.category-list a[aria-current='page'] {
 		border-color: var(--color-border);
 		background: var(--color-primary-soft);
 	}

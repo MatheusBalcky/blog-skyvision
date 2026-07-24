@@ -35,14 +35,9 @@ export type Category = (typeof categories)[number];
 export type CategoryName = Category['name'];
 export type CategorySlug = Category['slug'];
 
-export const categoryNames = categories.map(({ name }) => name) as [
-	CategoryName,
-	...CategoryName[],
-];
+export const categoryNames = categories.map(({ name }) => name) as [CategoryName, ...CategoryName[]];
 
-export const getCategoryByName = (name: string) =>
-	categories.find((category) => category.name === name);
+export const getCategoryByName = (name: string) => categories.find((category) => category.name === name);
 
-
-//O header passou a consumir essa fonte única. 
+//O header passou a consumir essa fonte única.
 // Alterações futuras devem ser feitas somente em categories.ts.

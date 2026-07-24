@@ -24,7 +24,7 @@
 	height: 0.45rem;
 	border-radius: 50%;
 	background: var(--color-primary);
-	content: "";
+	content: '';
 }
 
 .home-hero h1 {
@@ -286,10 +286,12 @@
 	background: var(--color-border);
 	padding: 0;
 	cursor: pointer;
-	transition: width 150ms ease, background-color 150ms ease;
+	transition:
+		width 150ms ease,
+		background-color 150ms ease;
 }
 
-.carousel-dots button[aria-current="true"] {
+.carousel-dots button[aria-current='true'] {
 	width: 1.6rem;
 	background: var(--color-primary);
 }
@@ -365,6 +367,61 @@
 	color: var(--color-text-muted);
 }
 
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.pagination-pages {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.45rem;
+}
+
+.pagination a {
+	display: inline-flex;
+	min-width: 2.6rem;
+	min-height: 2.6rem;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--color-border);
+	border-radius: 0.75rem;
+	background: var(--color-surface);
+	color: var(--color-text);
+	font-weight: 750;
+	text-decoration: none;
+	transition:
+		border-color 150ms ease,
+		background-color 150ms ease,
+		color 150ms ease;
+}
+
+.pagination a:hover {
+	border-color: var(--color-primary);
+	background: var(--color-primary-soft);
+	color: var(--color-primary-hover);
+}
+
+.pagination a:focus-visible {
+	outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+	outline-offset: 3px;
+}
+
+.pagination a[aria-current='page'] {
+	border-color: var(--color-primary);
+	background: var(--color-primary);
+	color: var(--color-on-primary);
+}
+
+.pagination .pagination-direction {
+	padding-inline: 0.85rem;
+	white-space: nowrap;
+}
+
 @media (max-width: 760px) {
 	.featured-article,
 	.article-grid {
@@ -382,6 +439,15 @@
 
 	.section-heading > p {
 		margin-top: 0.35rem;
+	}
+
+	.pagination {
+		flex-wrap: wrap;
+	}
+
+	.pagination-pages {
+		order: -1;
+		width: 100%;
 	}
 }
 

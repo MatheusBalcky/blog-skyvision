@@ -18,22 +18,24 @@ const latestArticles = articles.filter(({ id }) => !featuredIds.has(id)).slice(0
 		<p class="eyebrow">Tecnologia sem complicação</p>
 		<h1>Enxergue a tecnologia com uma nova <span>visão.</span></h1>
 		<p>
-			Reviews honestos, comparativos objetivos e guias de compra para ajudar você a escolher os
-			melhores eletrônicos.
+			Reviews honestos, comparativos objetivos e guias de compra para ajudar você a escolher os melhores
+			eletrônicos.
 		</p>
 	</section>
 
-	{carouselArticles.length > 0 && (
-		<section class="home-section container-shell" aria-labelledby="featured-title">
-			<div class="section-heading">
-				<div>
-					<p class="section-kicker">Seleção Sky Vision</p>
-					<h2 id="featured-title">Leitura em destaque</h2>
+	{
+		carouselArticles.length > 0 && (
+			<section class="home-section container-shell" aria-labelledby="featured-title">
+				<div class="section-heading">
+					<div>
+						<p class="section-kicker">Seleção Sky Vision</p>
+						<h2 id="featured-title">Leitura em destaque</h2>
+					</div>
 				</div>
-			</div>
-			<FeaturedCarousel articles={carouselArticles} />
-		</section>
-	)}
+				<FeaturedCarousel articles={carouselArticles} />
+			</section>
+		)
+	}
 
 	<section class="home-section container-shell" aria-labelledby="latest-title">
 		<div class="section-heading">

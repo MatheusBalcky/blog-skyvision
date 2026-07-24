@@ -3,10 +3,9 @@ import { getCollection } from 'astro:content';
 import ArticleCard from '../../components/article/ArticleCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const guides = (await getCollection(
-	'articles',
-	({ data }) => !data.draft && data.type === 'guide',
-)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const guides = (await getCollection('articles', ({ data }) => !data.draft && data.type === 'guide')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <BaseLayout

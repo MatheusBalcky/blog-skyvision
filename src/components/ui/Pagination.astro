@@ -1,0 +1,46 @@
+---
+import type { Page } from 'astro';
+
+interface Props {
+	page: Page<unknown>;
+	basePath: string;
+}
+
+const { page, basePath } = Astro.props;
+const pageNumbers = Array.from({ length: page.lastPage }, (_, index) => index + 1);
+const pageUrl = (pageNumber: number) => (pageNumber === 1 ? basePath : `${basePath}${pageNumber}/`);
+---
+
+{
+	page.lastPage > 1 && (
+		<nav class="pagination" aria-label="Paginação">
+			{page.currentPage > 1 && (
+				<a class="pagination-direction" href={pageUrl(page.currentPage - 1)} rel="prev">
+					<span aria-hidden="true">←</span> Anterior
+				</a>
+			)}
+
+			<div class="pagination-pages">
+				{pageNumbers.map((pageNumber) => (
+					<a
+						href={pageUrl(pageNumber)}
+						aria-current={pageNumber === page.currentPage ? 'page' : undefined}
+						aria-label={
+							pageNumber === page.currentPage
+								? `Página ${pageNumber}, atual`
+								: `Ir para a página ${pageNumber}`
+						}
+					>
+						{pageNumber}
+					</a>
+				))}
+			</div>
+
+			{page.currentPage < page.lastPage && (
+				<a class="pagination-direction" href={pageUrl(page.currentPage + 1)} rel="next">
+					Próxima <span aria-hidden="true">→</span>
+				</a>
+			)}
+		</nav>
+	)
+}

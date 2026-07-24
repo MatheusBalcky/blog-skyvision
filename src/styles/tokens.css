@@ -1,5 +1,5 @@
 @theme {
-	--font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+	--font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 	--color-sky-vision-50: #f0f9ff;
 	--color-sky-vision-100: #e0f2fe;
 	--color-sky-vision-300: #7dd3fc;
@@ -23,7 +23,7 @@
 	--shadow-soft: 0 12px 32px rgba(20, 80, 112, 0.08);
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
 	color-scheme: dark;
 	--color-primary: #38bdf8;
 	--color-primary-hover: #7dd3fc;

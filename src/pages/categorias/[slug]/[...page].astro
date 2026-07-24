@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { categories, type Category } from '../../../data/categories';
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const articlesPerPage = 9;
+	const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+	return categories.flatMap((category) => {
+		const categoryArticles = articles
+			.filter((article) => article.data.category === category.name)
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+		if (categoryArticles.length === 0) {
+			const current = `/categorias/${category.slug}/`;
+			const emptyPage: Page<CollectionEntry<'articles'>> = {
+				data: [],
+				start: 0,
+				end: 0,
+				total: 0,
+				currentPage: 1,
+				size: articlesPerPage,
+				lastPage: 1,
+				url: {
+					current,
+					prev: undefined,
+					next: undefined,
+					first: undefined,
+					last: undefined,
+				},
+			};
+
+			return [
+				{
+					params: { slug: category.slug, page: undefined },
+					props: { category, page: emptyPage },
+				},
+			];
+		}
+
+		return paginate(categoryArticles, {
+			pageSize: articlesPerPage,
+			params: { slug: category.slug },
+			props: { category },
+		});
+	});
+}) satisfies GetStaticPaths;
+
+interface Props {
+	category: Category;
+	page: Page<CollectionEntry<'articles'>>;
+}
+
+const { category, page } = Astro.props;
+---
+
+<CategoryLayout {category} {page} />

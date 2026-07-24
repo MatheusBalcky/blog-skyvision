@@ -63,7 +63,9 @@
 	font-size: 0.9rem;
 	font-weight: 800;
 	text-decoration: none;
-	transition: background-color 150ms ease, translate 150ms ease;
+	transition:
+		background-color 150ms ease,
+		translate 150ms ease;
 }
 
 .affiliate-product-button:hover {

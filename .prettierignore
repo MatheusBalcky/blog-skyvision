@@ -1,0 +1,9 @@
+.astro/
+dist/
+node_modules/
+public/pagefind/
+package-lock.json
+AGENTS.md
+skills/
+src/content/**/*.mdx
+structure-example.mdx

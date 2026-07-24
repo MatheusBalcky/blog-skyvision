@@ -56,27 +56,37 @@ const jsonLd = {
 
 		<div class="article-content">
 			<slot />
-			{updatedDate && (
-				<p class="article-updated">
-					Atualizado em <time datetime={updatedDate.toISOString()}>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(updatedDate)}</time>.
-				</p>
-			)}
+			{
+				updatedDate && (
+					<p class="article-updated">
+						Atualizado em{' '}
+						<time datetime={updatedDate.toISOString()}>
+							{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(updatedDate)}
+						</time>
+						.
+					</p>
+				)
+			}
 		</div>
 
-		{relatedArticles.length > 0 && (
-			<section
-				class="related-articles container-shell"
-				aria-labelledby="related-articles-title"
-				data-pagefind-ignore
-			>
-				<div class="related-articles-heading">
-					<p class="section-kicker">Continue explorando</p>
-					<h2 id="related-articles-title">Artigos relacionados</h2>
-				</div>
-				<div class="article-grid article-grid-compact">
-					{relatedArticles.map((article) => <ArticleCard {article} />)}
-				</div>
-			</section>
-		)}
+		{
+			relatedArticles.length > 0 && (
+				<section
+					class="related-articles container-shell"
+					aria-labelledby="related-articles-title"
+					data-pagefind-ignore
+				>
+					<div class="related-articles-heading">
+						<p class="section-kicker">Continue explorando</p>
+						<h2 id="related-articles-title">Artigos relacionados</h2>
+					</div>
+					<div class="article-grid article-grid-compact">
+						{relatedArticles.map((article) => (
+							<ArticleCard {article} />
+						))}
+					</div>
+				</section>
+			)
+		}
 	</article>
 </BaseLayout>

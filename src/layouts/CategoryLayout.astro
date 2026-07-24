@@ -1,20 +1,24 @@
 ---
+import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import ArticleCard from '../components/article/ArticleCard.astro';
+import Pagination from '../components/ui/Pagination.astro';
 import type { Category } from '../data/categories';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
 	category: Category;
-	articles: CollectionEntry<'articles'>[];
+	page: Page<CollectionEntry<'articles'>>;
 }
 
-const { category, articles } = Astro.props;
+const { category, page } = Astro.props;
+const articles = page.data;
+const pageSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : '';
 ---
 
 <BaseLayout
-	title={`${category.name} | Sky Vision`}
-	description={`${category.description} Confira os artigos do Sky Vision.`}
+	title={`${category.name}${pageSuffix} | Sky Vision`}
+	description={`${category.description} Confira os artigos do Sky Vision${page.currentPage > 1 ? ` — página ${page.currentPage}` : ''}.`}
 >
 	<header class="page-header container-shell">
 		<p class="section-kicker">Categoria</p>
@@ -25,14 +29,21 @@ const { category, articles } = Astro.props;
 	<section class="home-section container-shell" aria-label={`Artigos sobre ${category.name}`}>
 		{
 			articles.length > 0 ? (
-				<div class="article-grid">
-					{articles.map((article) => <ArticleCard {article} />)}
-				</div>
+				<>
+					<div class="article-grid article-grid-compact">
+						{articles.map((article) => (
+							<ArticleCard {article} />
+						))}
+					</div>
+					<Pagination {page} basePath={`/categorias/${category.slug}/`} />
+				</>
 			) : (
 				<div class="empty-state">
 					<h2>Novos conteúdos em preparação</h2>
 					<p>Ainda não publicamos artigos nesta categoria. Em breve haverá novidades por aqui.</p>
-					<a class="primary-link" href="/artigos/">Ver todos os artigos</a>
+					<a class="primary-link" href="/artigos/">
+						Ver todos os artigos
+					</a>
 				</div>
 			)
 		}

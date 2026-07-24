@@ -50,7 +50,10 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft)).ma
 	let pagefind;
 
 	const normalize = (value) =>
-		value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+		value
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase();
 
 	const createResult = ({ url, title, description, category }) => {
 		const article = document.createElement('article');
@@ -78,12 +81,9 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft)).ma
 		const normalizedQuery = normalize(query);
 		return fallbackArticles
 			.filter((article) =>
-				normalize([
-					article.title,
-					article.description,
-					article.category,
-					...article.tags,
-				].join(' ')).includes(normalizedQuery)
+				normalize([article.title, article.description, article.category, ...article.tags].join(' ')).includes(
+					normalizedQuery,
+				),
 			)
 			.map((article) => ({
 				url: article.url,
@@ -120,9 +120,8 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft)).ma
 
 		status.textContent = 'Pesquisando…';
 		const results = await pagefindSearch(query.trim());
-		status.textContent = results.length === 1
-			? '1 artigo encontrado.'
-			: `${results.length} artigos encontrados.`;
+		status.textContent =
+			results.length === 1 ? '1 artigo encontrado.' : `${results.length} artigos encontrados.`;
 		resultsContainer.append(...results.map(createResult));
 	};
 
@@ -130,7 +129,11 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft)).ma
 		event.preventDefault();
 		const query = input.value.trim();
 		const url = new URL(window.location.href);
-		query ? url.searchParams.set('q', query) : url.searchParams.delete('q');
+		if (query) {
+			url.searchParams.set('q', query);
+		} else {
+			url.searchParams.delete('q');
+		}
 		history.replaceState({}, '', url);
 		search(query);
 	});

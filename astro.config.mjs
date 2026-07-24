@@ -10,16 +10,16 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://skyvisioncompany.com.br/',
-  integrations: [
-    mdx(),
-    sitemap({
-      filter: (page) => new URL(page).pathname !== '/busca/',
-    }),
-    react(),
-  ],
+	site: 'https://skyvisioncompany.com.br/',
+	integrations: [
+		mdx(),
+		sitemap({
+			filter: (page) => new URL(page).pathname !== '/busca/',
+		}),
+		react(),
+	],
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });
