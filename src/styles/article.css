@@ -123,6 +123,22 @@
 	font-size: 0.85rem;
 }
 
+.related-articles {
+	margin-top: clamp(4rem, 8vw, 7rem);
+	border-top: 1px solid var(--color-border);
+	padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.related-articles-heading {
+	margin-bottom: 1.5rem;
+}
+
+.related-articles-heading h2 {
+	margin: 0;
+	font-size: clamp(1.55rem, 3vw, 2rem);
+	letter-spacing: -0.035em;
+}
+
 @media (max-width: 760px) {
 	.article-content {
 		width: min(100% - 1.25rem, 48rem);

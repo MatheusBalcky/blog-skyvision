@@ -5,18 +5,41 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 export async function getStaticPaths() {
 	const articles = await getCollection('articles', ({ data }) => !data.draft);
 
-	return articles.map((article) => ({
-		params: { slug: article.id },
-		props: article,
-	}));
+	return articles.map((article) => {
+		const articleTags = new Set(article.data.tags);
+		const relatedArticles = articles
+			.filter(({ id }) => id !== article.id)
+			.sort((a, b) => {
+				const categoryScoreA = a.data.category === article.data.category ? 1 : 0;
+				const categoryScoreB = b.data.category === article.data.category ? 1 : 0;
+
+				if (categoryScoreA !== categoryScoreB) {
+					return categoryScoreB - categoryScoreA;
+				}
+
+				const sharedTagsA = a.data.tags.filter((tag) => articleTags.has(tag)).length;
+				const sharedTagsB = b.data.tags.filter((tag) => articleTags.has(tag)).length;
+
+				return sharedTagsB - sharedTagsA || b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+			})
+			.slice(0, 3);
+
+		return {
+			params: { slug: article.id },
+			props: { article, relatedArticles },
+		};
+	});
 }
 
-type Props = CollectionEntry<'articles'>;
+interface Props {
+	article: CollectionEntry<'articles'>;
+	relatedArticles: CollectionEntry<'articles'>[];
+}
 
-const article = Astro.props;
+const { article, relatedArticles } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<ArticleLayout {...article.data}>
+<ArticleLayout {...article.data} {relatedArticles}>
 	<Content />
 </ArticleLayout>
